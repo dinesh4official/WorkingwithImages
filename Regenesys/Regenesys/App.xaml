@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:Regenesys.Helper.Converter"
+             x:Class="Regenesys.App">
+    <Application.Resources>
+        <!--Colors-->
+        <Color x:Key="MediumGray">#4d4d4d</Color>
+        <Color x:Key="LoadingColor">#00008B</Color>
+        <Color x:Key="ItemColor">#FFFFFF</Color>
+        <Color x:Key="BackgroundColor">#E0FFFF</Color>
+        <Color x:Key="TitleBarColor">#4169E1</Color>
+
+        <!--Styles-->
+        <Style x:Key="DefaultLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{StaticResource MediumGray}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="HeaderLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextColor" Value="{StaticResource ItemColor}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+         </Style>
+
+        <!--Converters-->
+        <converter:ByteToImageSourceConverter x:Key="ByteToImageSource" />
+
+         <!--Constants-->
+         <x:String x:Key="Title">Regenesys</x:String>
+         <x:String x:Key="GoToTabbedpage">Navigate To Tabbed Page</x:String>
+         <x:String x:Key="Dashboard">Online Images</x:String>
+         <x:String x:Key="Offline">Offline Images</x:String>
+         <x:String x:Key="Firebase">Firebase Images</x:String>
+         <x:String x:Key="Loading">Loading...</x:String>
+         <x:String x:Key="NoItemsFound">No Items Found</x:String>
+    </Application.Resources>
+</Application>

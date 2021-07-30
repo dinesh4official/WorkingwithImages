@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:Regenesys.Helper.Behavior"
+    xmlns:views="clr-namespace:Regenesys.Views"
+    xmlns:templates="clr-namespace:Regenesys.Views.Template"
+    xmlns:viewModel="clr-namespace:Regenesys.ViewModel"
+    x:Class="Regenesys.Views.FirebasePage">
+    <views:BasePage.BindingContext>
+        <viewModel:FirebaseViewModel/>
+    </views:BasePage.BindingContext>
+    <views:BasePage.Behaviors>
+        <behavior:BasePageBehavior EventName="Appearing"
+                                   Command="{Binding PageAppearingCommand}"/>
+    </views:BasePage.Behaviors>
+    <views:BasePage.Content>
+         <Grid BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8"
+               RowSpacing="0">
+             <Grid.RowDefinitions>
+                 <RowDefinition Height="*"/>
+             </Grid.RowDefinitions>
+            <templates:ImagesCollectionView BaseViewModel="{Binding .}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
+                               Color="{StaticResource LoadingColor}" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"/>
+        </Grid>
+    </views:BasePage.Content>
+</views:BasePage>
