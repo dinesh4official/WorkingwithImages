@@ -34,12 +34,12 @@ Replace your API keys for Pexel API (To retrieve the image) and for Firebase in 
 
 ### Online Images - Pexel API
 
-<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/OnlineImages.jpeg">
+<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/OnlineImages.jpeg" width="400" height="600">
 
 ### Offline Images - SQLite
 
-<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/OfflineImages.jpeg">
+<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/OfflineImages.jpeg" width="400" height="600">
 
 ### Firebase Images - Realtime Database (Firebase)
 
-<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/FirebaseImages.jpeg">
+<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/FirebaseImages.jpeg" width="400" height="600">
