@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Regenesys.Views"
+    xmlns:viewModel="clr-namespace:Regenesys.ViewModel"
+    x:Class="Regenesys.Views.MainPage">
+    <views:BasePage.BindingContext>
+        <viewModel:MainPageViewModel/>
+    </views:BasePage.BindingContext>
+    <views:BasePage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid RowSpacing="0" HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  BackgroundColor="{StaticResource TitleBarColor}">
+                <Label Text="{StaticResource Title}"
+                       Style="{StaticResource HeaderLabelStyle}"
+                       FontSize="Large"/>
+            </Grid>
+            <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                  BackgroundColor="{StaticResource BackgroundColor}">
+                <Button Text="{StaticResource GoToTabbedpage}" FontSize="Body"
+                        Command="{Binding NavigateTo}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"/>
+            </Grid>
+             <ActivityIndicator IsVisible="{Binding IsBusy}" Grid.Row="1"
+                                IsRunning="{Binding IsBusy}"
+                                Color="{StaticResource LoadingColor}"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"/>
+        </Grid>
+    </views:BasePage.Content>
+</views:BasePage>

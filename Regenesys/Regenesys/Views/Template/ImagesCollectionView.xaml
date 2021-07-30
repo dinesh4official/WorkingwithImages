@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CollectionView xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:model="clr-namespace:RegenesysCore.Models;assembly=RegenesysCore"
+                xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                x:Class="Regenesys.Views.Template.ImagesCollectionView"
+                Margin="0,5,0,5" HorizontalOptions="FillAndExpand"
+                ItemsUpdatingScrollMode="KeepItemsInView"
+                RemainingItemsThreshold="{Binding ItemsThreshold}"
+                RemainingItemsThresholdReachedCommand="{Binding LoadItemsInPage}"
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never"
+                VerticalOptions="FillAndExpand" ItemsSource="{Binding Photos}"
+                SelectionMode="None" x:Name="collectionView">
+    <CollectionView.ItemsLayout>
+        <LinearItemsLayout ItemSpacing="8" Orientation="Vertical"/>
+    </CollectionView.ItemsLayout>
+    <CollectionView.EmptyView>
+        <ContentView>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label Style="{StaticResource DefaultLabelStyle}" FontSize="Title"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsBusy}"
+                                     Value="True">
+                            <Setter Property="Text"
+                                    Value="{x:StaticResource Loading}"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsBusy}"
+                                     Value="False">
+                            <Setter Property="Text"
+                                    Value="{x:StaticResource NoItemsFound}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </StackLayout>
+        </ContentView>
+    </CollectionView.EmptyView>
+    <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="{x:Type model:PhotoResult}">
+            <ContentView HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         Padding="16,8,16,8">
+                <Frame HasShadow="True"
+                       BorderColor="{StaticResource MediumGray}"
+                       CornerRadius="16">
+                    <StackLayout Spacing="16">
+                        <Label Text="{Binding Photographer}"
+                               Style="{StaticResource DefaultLabelStyle}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand" />
+                         <forms:CachedImage LoadingPlaceholder="noimage.png"
+                                            ErrorPlaceholder="noimage.png"
+                                            DownsampleToViewSize="True"
+                                            CacheType="Memory" CacheDuration="5"
+                                            Aspect="AspectFill"
+                                            HeightRequest="80"
+                                            WidthRequest="80"
+                                            HorizontalOptions="CenterAndExpand"
+                                            VerticalOptions="CenterAndExpand">
+                             <forms:CachedImage.Triggers>
+                                 <DataTrigger TargetType="{x:Type forms:CachedImage}"
+                                              Binding="{Binding BaseViewModel.IsDBCollection,
+                                              Source={x:Reference collectionView}}"
+                                              Value="False">
+                                     <Setter Property="Source" Value="{Binding Source.Medium}"/>
+                                 </DataTrigger>
+                                 <DataTrigger TargetType="{x:Type forms:CachedImage}"
+                                              Binding="{Binding BaseViewModel.IsDBCollection,
+                                              Source={x:Reference collectionView}}"
+                                              Value="True">
+                                     <Setter Property="Source"
+                                             Value="{Binding ImageBytes,
+                                             Converter={StaticResource ByteToImageSource}}"/>
+                                 </DataTrigger>
+                             </forms:CachedImage.Triggers>
+                         </forms:CachedImage>
+                    </StackLayout>
+                </Frame>
+            </ContentView>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>

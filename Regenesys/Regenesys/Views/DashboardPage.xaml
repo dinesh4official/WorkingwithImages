@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Regenesys.Views"
+    xmlns:templates="clr-namespace:Regenesys.Views.Template"
+    xmlns:viewModel="clr-namespace:Regenesys.ViewModel"
+    x:Class="Regenesys.Views.DashboardPage">
+    <views:BasePage.BindingContext>
+        <viewModel:OnlineViewModel/>
+    </views:BasePage.BindingContext>
+    <views:BasePage.Content>
+        <StackLayout Spacing="0" BackgroundColor="{StaticResource BackgroundColor}" Opacity="0.8">
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                         Command="{Binding LoadItemsInPage}">
+                <templates:ImagesCollectionView BaseViewModel="{Binding .}"/>
+            </RefreshView>
+        </StackLayout>
+    </views:BasePage.Content>
+</views:BasePage>
