@@ -19,10 +19,10 @@ In this application, we have followed the MVVM Pattern.
 
 ## References
 
-https://www.pexels.com/api/
-https://xamarinmonkeys.blogspot.com/2019/01/xamarinforms-working-with-firebase.html
-https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/databases
-https://github.com/luberda-molinet/FFImageLoading
+* https://www.pexels.com/api/
+* https://xamarinmonkeys.blogspot.com/2019/01/xamarinforms-working-with-firebase.html
+* https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/databases
+* https://github.com/luberda-molinet/FFImageLoading
 
 ## Note
 
