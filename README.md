@@ -29,3 +29,17 @@ In this application, we have followed the MVVM Pattern.
 Replace your API keys for Pexel API (To retrieve the image) and for Firebase in the following file.
 
 * [API Constant](https://github.com/dinesh4official/WorkingwithImages/blob/main/Regenesys/RegenesysCore/Constants/APIConstants.cs)
+
+## Screenshot
+
+### Online Images - Pexel API
+
+<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/OnlineImages.jpeg">
+
+### Offline Images - SQLite
+
+<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/OfflineImages.jpeg">
+
+### Firebase Images - Realtime Database (Firebase)
+
+<img src="https://github.com/dinesh4official/WorkingwithImages/blob/main/Screenshots/FirebaseImages.jpeg">
