@@ -16,5 +16,6 @@ namespace RegenesysCore.Constants
         public const string BehaviorDeRegisterError = "CommandBehavior: Can't de-register the '{0}' event.";
         public const string OnEvent = "OnEvent";
         public const string PhotoResult = "PhotoResult";
+        public const string PhotoSource = "PhotoSource";
     }
 }

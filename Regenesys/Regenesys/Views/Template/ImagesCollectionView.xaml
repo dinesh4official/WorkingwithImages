@@ -60,23 +60,9 @@
                                             HeightRequest="80"
                                             WidthRequest="80"
                                             HorizontalOptions="CenterAndExpand"
-                                            VerticalOptions="CenterAndExpand">
-                             <forms:CachedImage.Triggers>
-                                 <DataTrigger TargetType="{x:Type forms:CachedImage}"
-                                              Binding="{Binding BaseViewModel.IsDBCollection,
-                                              Source={x:Reference collectionView}}"
-                                              Value="False">
-                                     <Setter Property="Source" Value="{Binding Source.Medium}"/>
-                                 </DataTrigger>
-                                 <DataTrigger TargetType="{x:Type forms:CachedImage}"
-                                              Binding="{Binding BaseViewModel.IsDBCollection,
-                                              Source={x:Reference collectionView}}"
-                                              Value="True">
-                                     <Setter Property="Source"
-                                             Value="{Binding ImageBytes,
-                                             Converter={StaticResource ByteToImageSource}}"/>
-                                 </DataTrigger>
-                             </forms:CachedImage.Triggers>
+                                            VerticalOptions="CenterAndExpand"
+                                            Source="{Binding ImageBytes,
+                                            Converter={StaticResource ByteToImageSource}}">
                          </forms:CachedImage>
                     </StackLayout>
                 </Frame>

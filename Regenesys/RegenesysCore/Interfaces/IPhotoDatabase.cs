@@ -12,13 +12,13 @@ namespace RegenesysCore.Interfaces
 
         Task CreateTableAsync();
 
-        Task<List<T>> GetPhotosAsync();
+        Task<List<T>> GetPhotosAsyncFromDB();
 
-        Task<T> GetPhotoAsync(int id);
+        Task<T> GetPhotoAsyncFromDB(int id);
 
-        Task<int> StorePhotoAsync(T item);
+        Task StorePhotoAsyncInDB(T item);
 
-        Task<int> DeletePhotoAsync(T item);
+        Task<int> DeletePhotoAsyncFromDB(T item);
 
         #endregion
     }

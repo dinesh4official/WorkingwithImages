@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Autofac;
+using Regenesys.Helper.Utils;
 using RegenesysCore.Constants;
 using RegenesysCore.Container;
 using RegenesysCore.Interfaces;
@@ -45,18 +46,22 @@ namespace Regenesys.ViewModel
                 var photos = await _fIFirebaseClient.GetItemsFromFirebaseClient(AppConstants.PhotoResult);
                 await AddItemsinPhotosAsync(photos, null, null, false);
             }
+            catch (Exception e)
+            {
+                AppUtils.ShowAlert(e.Message, true);
+            }
             finally
             {
                 IsBusy = false;
             }
         }
+
         #endregion
 
         #region Command Callbacks
 
         private void OnPageAppearing()
         {
-            IsDBCollection = true;
             _ = LoadItemsAsync();
         }
 

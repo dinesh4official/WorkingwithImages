@@ -55,8 +55,6 @@ namespace Regenesys.ViewModel
 
         public ICommand PageDisappearingCommand { get; set; }
 
-        public bool IsDBCollection { get; set; } = false;
-
         #endregion
 
         #region Methods
@@ -66,9 +64,9 @@ namespace Regenesys.ViewModel
             bool addDataInDB)
         {
             var tempPhotos = Photos.ToList();
-            var databaseItems = addDataInDB ? await PhotoDatabase.GetPhotosAsync() : null;
+            var databaseItems = addDataInDB ? await PhotoDatabase.GetPhotosAsyncFromDB() : null;
 
-            photos.ForEach(async (PhotoResult obj) =>
+            photos.ForEach((PhotoResult obj) =>
             {
                 bool hasitem = HasItem(tempPhotos, obj);
                 if (!hasitem)
@@ -77,8 +75,11 @@ namespace Regenesys.ViewModel
 
                     if (addDataInDB)
                     {
-                        await StoreItemsInDatabase(databaseItems, obj, service);
-                        await StoreItemsInFirebase(obj, firebaseClient);
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await StoreItemsInDatabase(databaseItems, obj, service);
+                            await StoreItemsInFirebase(obj, firebaseClient);
+                        });
                     }
                 }
             });
@@ -96,7 +97,7 @@ namespace Regenesys.ViewModel
             {
                 byte[] imageBytes = await service.GetPhotoResponseAsBytes(photoResult.Source.Medium);
                 photoResult.ImageBytes = imageBytes;
-                _ = await PhotoDatabase.StorePhotoAsync(photoResult);
+                await PhotoDatabase.StorePhotoAsyncInDB(photoResult);
             }
         }
 
