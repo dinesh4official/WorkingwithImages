@@ -22,7 +22,7 @@ namespace Regenesys.ViewModel
 
         #region Load Pages
 
-        async Task LoadItems()
+        async Task LoadItemsAsync() 
         {
             if (IsBusy)
             {
@@ -52,7 +52,7 @@ namespace Regenesys.ViewModel
 
         private async void OnPageAppearing()
         {
-           await LoadItems();
+           await LoadItemsAsync();
         }
 
         #endregion
