@@ -5,6 +5,7 @@ using RegenesysCore.Interfaces;
 using RegenesysCore.Models;
 using RegenesysCore.Utils;
 using SQLite;
+using SQLiteNetExtensions.Extensions;
 
 namespace RegenesysCore.Services
 {
@@ -13,7 +14,7 @@ namespace RegenesysCore.Services
     {
         #region Fields
 
-        SQLiteAsyncConnection _fdatabase;
+        SQLiteConnection _fdatabase;
 
         #endregion
 
@@ -21,7 +22,7 @@ namespace RegenesysCore.Services
 
         public PhotoDatabase()
         {
-            _fdatabase = new SQLiteAsyncConnection(DatabaseUtils.DatabasePath, DatabaseUtils.Flags);
+            _fdatabase = new SQLiteConnection(DatabaseUtils.DatabasePath, DatabaseUtils.Flags);
         }
 
         #endregion
@@ -30,27 +31,39 @@ namespace RegenesysCore.Services
 
         public async Task CreateTableAsync()
         {
-            _ = await _fdatabase.CreateTableAsync<PhotoResult>();
+            _ = _fdatabase.CreateTable<PhotoSource>();
+            _ = _fdatabase.CreateTable<PhotoResult>();
+            await Task.CompletedTask;
         }
 
-        public Task<PhotoResult> GetPhotoAsync(int id)
+        public async Task<PhotoResult> GetPhotoAsyncFromDB(int id)
         {
-            return _fdatabase.Table<PhotoResult>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            var item = _fdatabase.Table<PhotoResult>().Where(i => i.Id == id).FirstOrDefault();
+            var photoResult = _fdatabase.GetWithChildren<PhotoResult>(item.PhotoId);
+            await Task.CompletedTask;
+            return photoResult;
         }
 
-        public async Task<List<PhotoResult>> GetPhotosAsync()
+        public async Task<List<PhotoResult>> GetPhotosAsyncFromDB()
         {
-            return await _fdatabase.Table<PhotoResult>().ToListAsync();
+            var items = _fdatabase.GetAllWithChildren<PhotoResult>();
+            await Task.CompletedTask;
+            return items;
         }
 
-        public async Task<int> StorePhotoAsync(PhotoResult item)
+        public async Task StorePhotoAsyncInDB(PhotoResult item)
         {
-            return await _fdatabase.InsertAsync(item);
+            _ = _fdatabase.Insert(item);
+            _ = _fdatabase.Insert(item.Source);
+            _fdatabase.UpdateWithChildren(item);
+            await Task.CompletedTask;
         }
 
-        public async Task<int> DeletePhotoAsync(PhotoResult item)
+        public async Task<int> DeletePhotoAsyncFromDB(PhotoResult item)
         {
-            return await _fdatabase.DeleteAsync(item);
+            var result = _fdatabase.Delete(item);
+            await Task.CompletedTask;
+            return result;
         }
 
         #endregion

@@ -1,12 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
-using RegenesysCore.Extensions;
+using RegenesysCore.Constants;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
 
 namespace RegenesysCore.Models
 {
     [Android.Runtime.Preserve(AllMembers = true)]
+    [Table(AppConstants.PhotoResult)]
     public class PhotoResult : NotifyListener
     {
         #region Fields
@@ -76,7 +77,7 @@ namespace RegenesysCore.Models
         /// An assortment of different image sizes that can be used to display this Photo.
         /// </summary>
         [JsonProperty("src")]
-        [ManyToOne]
+        [OneToOne]
         public PhotoSource Source { get; set; }
 
         /// <summary>
@@ -84,6 +85,12 @@ namespace RegenesysCore.Models
         /// </summary>
         [JsonProperty("liked")]
         public bool IsLiked { get; set; }
+
+        /// <summary>
+        /// ForeignKey for <see cref="PhotoSource"/>.
+        /// </summary>
+        [ForeignKey(typeof(PhotoSource))]
+        public int PhotoSourceId { get; set; }
 
         /// <summary>
         /// Stores the <see cref="ImageURL"/> as bytes.

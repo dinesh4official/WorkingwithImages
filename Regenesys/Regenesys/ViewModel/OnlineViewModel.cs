@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Autofac;
+using Regenesys.Helper.Utils;
 using Regenesys.Services;
 using RegenesysCore.Constants;
 using RegenesysCore.Container;
@@ -84,6 +85,10 @@ namespace Regenesys.ViewModel
 
                 await AddItemsinPhotosAsync(_fCuratedPhotoResponse.Photos, _fCuratedPhotoService, _fIFirebaseClient, true);
 
+            }
+            catch (Exception e)
+            {
+                AppUtils.ShowAlert(e.Message, true);
             }
             finally
             {

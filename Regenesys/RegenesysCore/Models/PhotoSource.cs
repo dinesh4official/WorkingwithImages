@@ -1,12 +1,28 @@
 ﻿using System;
 using Newtonsoft.Json;
+using RegenesysCore.Constants;
+using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace RegenesysCore.Models
 {
     [Android.Runtime.Preserve(AllMembers = true)]
+    [Table(AppConstants.PhotoSource)]
     public class PhotoSource
     {
         #region Properties
+
+        /// <summary>
+        /// Used to add the <see cref="PhotoSource"/> in SQLite.
+        /// </summary>
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// ForeignKey for <see cref="PhotoResult"/>.
+        /// </summary>
+        [ForeignKey(typeof(PhotoResult))]
+        public int PhotoResultId { get; set; }
 
         /// <summary>
         /// The image without any size changes.
